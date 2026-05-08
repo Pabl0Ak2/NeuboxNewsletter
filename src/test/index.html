@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Widget Host Test</title>
+
+    <link
+      rel="stylesheet"
+      href="./newsletter-widget.css"
+    />
+    
+  </head>
+
+  <body>
+    <h1>Website Host</h1>
+
+    <newsletter-widget></newsletter-widget>
+
+    <script>
+      var process = {
+        env: {
+          NODE_ENV: "production",
+        },
+      };
+    </script>
+
+    <script src="./newsletter-widget.iife.js"></script>
+  </body>
+</html>
