@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface AlertProps {
-  message: string;
-  onClose: () => void;
-}
+import type { AlertProps } from "../types/newsletter";
 
 export const Alert = ({ message, onClose }: AlertProps) => {
   const [isExiting, setIsExiting] = useState(false);

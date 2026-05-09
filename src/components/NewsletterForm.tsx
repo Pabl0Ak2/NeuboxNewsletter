@@ -1,14 +1,5 @@
 import { Alert } from "./Alert";
-
-interface NewsletterFormProps {
-  email: string;
-  loading: boolean;
-  error?: string | null;
-  onErrorClose: () => void;
-  onEmailChange: (value: string) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onBlur: () => void;
-}
+import type { NewsletterFormProps } from "../types/newsletter";
 
 export const NewsletterForm = ({
   email,

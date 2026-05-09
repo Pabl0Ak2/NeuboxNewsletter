@@ -1,8 +1,5 @@
 import { useEffect } from "react";
-interface SuccessModalProps {
-  open: boolean;
-  onClose: () => void;
-}
+import type { SuccessModalProps } from "../types/newsletter";
 
 export const SuccessModal = ({
   open,
