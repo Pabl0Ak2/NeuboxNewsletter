@@ -68,3 +68,46 @@ Para probar cómo se comportará el widget en un entorno real (como WordPress o 
   var process = { env: { NODE_ENV: "production" } };
 </script>
 <script src="./newsletter-widget.iife.js"></script>
+```
+
+## Guía de Integración
+
+### WordPress
+1. Sube los archivos `newsletter-widget.iife.js` y `newsletter-widget.css` a tu servidor o mediante un CDN.
+2. En el editor de WordPress, agrega un bloque de **HTML Personalizado**.
+3. Pega el siguiente código:
+```html
+<link rel="stylesheet" href="URL_AL_ARCHIVO/newsletter-widget.css" />
+<newsletter-widget source="wordpress-site"></newsletter-widget>
+<script src="URL_AL_ARCHIVO/newsletter-widget.iife.js"></script>
+```
+
+### Laravel (Blade) / PHP
+En tu archivo de vista (layout principal), incluye los assets y la etiqueta:
+
+```html
+<link rel="stylesheet" href="{{ asset('path/to/newsletter-widget.css') }}" />
+<newsletter-widget source="laravel-app"></newsletter-widget>
+<script src="{{ asset('path/to/newsletter-widget.iife.js') }}"></script>
+```
+
+## Decisiones Arquitectónicas
+
+### ¿Por qué Web Components?
+Se eligió este enfoque sobre un `iframe` para permitir un **modal fullscreen real** que cubra todo el viewport del host y para evitar la sobrecarga de recursos. Al usar Custom Elements, nos deja que compatibilidad sea universal.
+
+### Manejo de Estilos
+Para evitar conflictos de CSS con el sitio host:
+1. Se aplicó **Namespacing** (`.newsletter-*`) en las clases.
+2. Se utilizaron **Inline Styles** en componentes críticos (Modal y Alerta) para asegurar su visibilidad independientemente del CSS global.
+3. Se decidió **no usar Shadow DOM** para facilitar la herencia de fuentes base del sitio host, logrando una integración visual más natural.
+
+### Estrategia de Versionamiento
+Se utiliza **Semantic Versioning (SemVer)**:
+- `v1.0.0`: Versión inicial estable.
+- Los archivos distribuidos pueden incluir la versión en el nombre (`newsletter-widget.v1.js`) para evitar problemas de caché en actualizaciones mayores.
+
+## Justificación Técnica
+- **React + TypeScript:** Se eligió para garantizar un código mantenible, con tipado estricto que reduce errores en tiempo de ejecución.
+- **Fetch API nativo:** Se evitó el uso de Axios para reducir el tamaño del bundle final, utilizando `URLSearchParams` para asegurar la compatibilidad con el endpoint de Neubox.
+- **Vite (Modo Librería):** Permite una compilación optimizada que elimina código muerto (tree-shaking), resultando en un widget de carga ultrarrápida.

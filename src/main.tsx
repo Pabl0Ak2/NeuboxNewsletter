@@ -1,9 +1,12 @@
-
-//import "./widget"; Dejar solo para widget reutilizable universal
-import './styles/widget.css';
+//import "./widget"; Dejar solo para widget reutilizable universal borrar todo lo demas 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
+import './index.css'
+
+console.log(
+  "Ejecutando modo React DEV"
+);
 
 const container = 
   document.getElementById('neubox-newsletter-widget') || 
